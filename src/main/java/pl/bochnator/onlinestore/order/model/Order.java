@@ -5,6 +5,7 @@ import pl.bochnator.onlinestore.address.model.Address;
 import pl.bochnator.onlinestore.appuser.model.AppUser;
 import pl.bochnator.onlinestore.payment.model.Payment;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Order {
 
     private String orderNumber;
     private String status;
-    private String totalPrice;
+    private BigDecimal totalPrice;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -60,11 +61,11 @@ public class Order {
         this.status = status;
     }
 
-    public String getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(String totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 

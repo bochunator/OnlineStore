@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import pl.bochnator.onlinestore.cart.model.CartItem;
 import pl.bochnator.onlinestore.order.model.OrderItem;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Product {
     @Lob
     private String description;
 
-    private String price;
+    private BigDecimal price;
     private String sku;
     private Integer  stockQuantity;
     private LocalDateTime cratedAt;
@@ -60,11 +61,11 @@ public class Product {
         this.description = description;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

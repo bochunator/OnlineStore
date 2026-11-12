@@ -1,5 +1,7 @@
 package pl.bochnator.onlinestore.payment.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import pl.bochnator.onlinestore.cart.model.Cart;
 import pl.bochnator.onlinestore.order.model.Order;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/payments")
+@Tag(name = "Payment API")
 public class PaymentController {
 
     private final PaymentService paymentService;
@@ -26,6 +29,7 @@ public class PaymentController {
     }
 
     @PostMapping
+    @Operation(summary = "Create payment")
     public PaymentResponseDto create(@RequestBody CreatePaymentDto dto) {
 
         // TODO: Store all payment attempts (including failed ones).
@@ -45,11 +49,13 @@ public class PaymentController {
     }
 
     @GetMapping
+    @Operation(summary = "Find all payments")
     public List<PaymentResponseDto> findAll() {
         return paymentService.findAll().stream().map(PaymentResponseDto::from).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Find payment by id")
     public PaymentResponseDto findById(@PathVariable Long id) {
 
         Payment payment = paymentService.findById(id);
@@ -57,6 +63,7 @@ public class PaymentController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update payment")
     public PaymentResponseDto update(
             @PathVariable Long id,
             @RequestBody UpdatePaymentStatusDto dto) {
@@ -71,6 +78,7 @@ public class PaymentController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete payment")
     public void delete(@PathVariable Long id) {
         Payment payment = paymentService.findById(id);
         payment.getOrder().setPayment(null);

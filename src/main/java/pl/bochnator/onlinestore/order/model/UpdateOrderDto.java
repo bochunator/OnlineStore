@@ -1,9 +1,11 @@
 package pl.bochnator.onlinestore.order.model;
 
+import java.math.BigDecimal;
+
 public class UpdateOrderDto {
 
     private String status;
-    private String totalPrice;
+    private BigDecimal totalPrice;
     private Long paymentId;
 
     public String getStatus() {
@@ -14,11 +16,11 @@ public class UpdateOrderDto {
         this.status = status;
     }
 
-    public String getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(String totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 

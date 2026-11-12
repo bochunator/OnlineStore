@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import pl.bochnator.onlinestore.address.model.Address;
 import pl.bochnator.onlinestore.cart.model.Cart;
 import pl.bochnator.onlinestore.order.model.Order;
-import pl.bochnator.onlinestore.security.model.Role;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,10 +32,6 @@ public class AppUser {
 
     @OneToMany(mappedBy = "appUser")
     private List<Address> addresses;
-
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
 
     public Long getId() {
         return id;
@@ -132,13 +127,5 @@ public class AppUser {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }

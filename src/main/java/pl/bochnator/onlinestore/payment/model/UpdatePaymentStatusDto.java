@@ -1,10 +1,12 @@
 package pl.bochnator.onlinestore.payment.model;
 
+import java.math.BigDecimal;
+
 public class UpdatePaymentStatusDto {
 
     private String paymentStatus;
     private String paymentMethod;
-    private String amount;
+    private BigDecimal amount;
 
     public String getPaymentStatus() {
         return paymentStatus;
@@ -22,11 +24,11 @@ public class UpdatePaymentStatusDto {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }

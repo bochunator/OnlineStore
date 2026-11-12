@@ -1,5 +1,6 @@
 package pl.bochnator.onlinestore.payment.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class PaymentResponseDto {
@@ -7,7 +8,7 @@ public class PaymentResponseDto {
     private Long id;
     private String paymentMethod;
     private String paymentStatus;
-    private String amount;
+    private BigDecimal amount;
     private String transactionId;
     private LocalDateTime createdAt;
     private Long orderId;
@@ -50,11 +51,11 @@ public class PaymentResponseDto {
         this.paymentStatus = paymentStatus;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

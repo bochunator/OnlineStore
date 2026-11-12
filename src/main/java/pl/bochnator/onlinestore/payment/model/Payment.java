@@ -3,6 +3,7 @@ package pl.bochnator.onlinestore.payment.model;
 import jakarta.persistence.*;
 import pl.bochnator.onlinestore.order.model.Order;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,7 +16,7 @@ public class Payment {
 
     private String paymentMethod;
     private String paymentStatus;
-    private String amount;
+    private BigDecimal amount;
     private String transactionId;
     private LocalDateTime createdAt;
 
@@ -47,11 +48,11 @@ public class Payment {
         this.paymentStatus = paymentStatus;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

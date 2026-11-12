@@ -1,5 +1,7 @@
 package pl.bochnator.onlinestore.order.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import pl.bochnator.onlinestore.order.model.*;
 import pl.bochnator.onlinestore.order.service.OrderItemService;
@@ -12,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/order-items")
+@Tag(name = "OrderItem API")
 public class OrderItemController {
 
     private final OrderItemService service;
@@ -25,6 +28,7 @@ public class OrderItemController {
     }
 
     @PostMapping
+    @Operation(summary = "Create order item")
     public OrderItemResponseDto create(@RequestBody CreateOrderItemDto dto) {
 
         Order order = orderService.findById(dto.getOrderId());
@@ -42,22 +46,26 @@ public class OrderItemController {
     }
 
     @GetMapping
+    @Operation(summary = "Find all order items")
     public List<OrderItemResponseDto> findAll() {
         return service.findAll().stream().map(OrderItemResponseDto::from).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Find order item by id")
     public OrderItemResponseDto findById(@PathVariable Long id) {
         OrderItem orderItem = service.findById(id);
         return OrderItemResponseDto.from(orderItem);
     }
 
     @GetMapping("/order/{orderId}")
+    @Operation(summary = "Find order item by order id")
     public List<OrderItemResponseDto> findByOrder(@PathVariable Long orderId) {
         return service.findByOrderId(orderId).stream().map(OrderItemResponseDto::from).collect(Collectors.toList());
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update order item")
     public OrderItemResponseDto update(@PathVariable Long id, @RequestBody UpdateOrderItemDto dto) {
 
         Product product = productService.findById(dto.getProductId());
@@ -73,6 +81,7 @@ public class OrderItemController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete order item")
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }

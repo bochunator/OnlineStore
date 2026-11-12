@@ -1,11 +1,13 @@
 package pl.bochnator.onlinestore.product.model;
 
+import java.math.BigDecimal;
+
 public class ProductResponseDto {
 
     private Long id;
     private String name;
     private String description;
-    private String price;
+    private BigDecimal price;
     private String sku;
     private Integer stockQuantity;
     private String status;
@@ -49,11 +51,11 @@ public class ProductResponseDto {
         this.description = description;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

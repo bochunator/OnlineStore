@@ -1,5 +1,7 @@
 package pl.bochnator.onlinestore.order.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import pl.bochnator.onlinestore.address.model.Address;
 import pl.bochnator.onlinestore.address.service.AddressService;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/orders")
+@Tag(name = "Order API")
 public class OrderController {
 
     private final OrderService orderService;
@@ -33,6 +36,7 @@ public class OrderController {
     }
 
     @PostMapping
+    @Operation(summary = "Create order")
     public OrderResponseDto create(@RequestBody CreateOrderDto dto) {
 
         AppUser appUser = appUserService.findById(dto.getUserId());
@@ -49,11 +53,13 @@ public class OrderController {
     }
 
     @GetMapping
+    @Operation(summary = "Find all orders")
     public List<OrderResponseDto> findAll() {
         return orderService.findAll().stream().map(OrderResponseDto::from).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Find order by id")
     public OrderResponseDto findById(@PathVariable Long id) {
 
         Order order = orderService.findById(id);
@@ -61,6 +67,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update order")
     public OrderResponseDto update(@PathVariable Long id, @RequestBody UpdateOrderDto dto) {
 
         Payment payment = null;
@@ -79,6 +86,7 @@ public class OrderController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete order")
     // TODO: You cannot delete order, if there are any order item left
     // TODO: Make exception or change logic: You cannot delete Order, you have to firstly delete Payment
     public void delete(@PathVariable Long id) {

@@ -1,5 +1,7 @@
 package pl.bochnator.onlinestore.product.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import pl.bochnator.onlinestore.product.model.Category;
 import pl.bochnator.onlinestore.product.model.CategoryResponseDto;
@@ -12,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/categories")
+@Tag(name = "Category API")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -21,6 +24,7 @@ public class CategoryController {
     }
 
     @PostMapping
+    @Operation(summary = "Create category")
     public CategoryResponseDto create(@RequestBody CreateCategoryDto dto) {
 
         Category parent = null;
@@ -38,11 +42,13 @@ public class CategoryController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all categories")
     public List<CategoryResponseDto> findAll() {
         return categoryService.findAll().stream().map(CategoryResponseDto::from).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Find category by id")
     public CategoryResponseDto findById(@PathVariable Long id) {
 
         Category category = categoryService.findById(id);
@@ -50,6 +56,7 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update category")
     public CategoryResponseDto update(@PathVariable Long id, @RequestBody UpdateCategoryDto dto) {
 
         Category parent = null;
@@ -67,6 +74,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete category")
     public void delete(@PathVariable Long id) {
         // TODO: add exception, you cannot category if you not delete subcategories first
         categoryService.delete(id);

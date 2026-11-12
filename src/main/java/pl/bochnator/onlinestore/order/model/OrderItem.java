@@ -3,6 +3,8 @@ package pl.bochnator.onlinestore.order.model;
 import jakarta.persistence.*;
 import pl.bochnator.onlinestore.product.model.Product;
 
+import java.math.BigDecimal;
+
 @Entity
 public class OrderItem {
 
@@ -11,7 +13,7 @@ public class OrderItem {
     private Long id;
 
     private Integer quantity;
-    private String price;
+    private BigDecimal price;
     private String productName;
 
     @ManyToOne
@@ -38,11 +40,11 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

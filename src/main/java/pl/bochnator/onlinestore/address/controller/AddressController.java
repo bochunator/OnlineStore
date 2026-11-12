@@ -1,5 +1,7 @@
 package pl.bochnator.onlinestore.address.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import pl.bochnator.onlinestore.address.model.Address;
 import pl.bochnator.onlinestore.address.model.AddressResponseDto;
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("addresses")
+@Tag(name = "Address API")
 public class AddressController {
 
     private final AddressService addressService;
@@ -25,6 +28,7 @@ public class AddressController {
     }
 
     @PostMapping
+    @Operation(summary = "Create address")
     public AddressResponseDto create(@RequestBody CreateAddressDto dto) {
 
         // TODO: Consider changing relation to many-to-many (AppUser <-> Address),
@@ -45,11 +49,13 @@ public class AddressController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all addresses")
     public List<AddressResponseDto> findAll() {
         return addressService.findAll().stream().map(AddressResponseDto::from).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get address by id")
     public AddressResponseDto findById(@PathVariable Long id) {
 
         Address address = addressService.findById(id);
@@ -57,6 +63,7 @@ public class AddressController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update address")
     public AddressResponseDto update(
             @PathVariable Long id,
             @RequestBody UpdateAddressDto dto) {
@@ -73,11 +80,13 @@ public class AddressController {
     }
 
     @GetMapping("/user/{userId}")
+    @Operation(summary = "Get address by AppUser id")
     public List<AddressResponseDto> findByUser(@PathVariable Long userId) {
         return addressService.findByUserId(userId).stream().map(AddressResponseDto::from).collect(Collectors.toList());
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete address")
     public void delete(@PathVariable Long id) {
         addressService.delete(id);
     }

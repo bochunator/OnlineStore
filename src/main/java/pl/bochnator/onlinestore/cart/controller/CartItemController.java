@@ -1,6 +1,7 @@
 package pl.bochnator.onlinestore.cart.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import pl.bochnator.onlinestore.cart.model.*;
 import pl.bochnator.onlinestore.cart.service.CartItemService;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/cart-items")
+@Tag(name = "CartItem API")
 public class CartItemController {
 
     private final CartItemService cartItemService;
@@ -26,7 +28,7 @@ public class CartItemController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('USER')")
+    @Operation(summary = "Create cart item")
     public CartItemResponseDto create(@RequestBody CreateCartItemDto dto) {
 
         // TODO: If seller is going to change price then in cart should also changed price
@@ -47,13 +49,13 @@ public class CartItemController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Find all cart items")
     public List<CartItemResponseDto> findAll() {
         return cartItemService.findAll().stream().map(CartItemResponseDto::from).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('USER')")
+    @Operation(summary = "Find cart item by id")
     public CartItemResponseDto findById(@PathVariable Long id) {
 
         CartItem cartItem = cartItemService.findById(id);
@@ -61,7 +63,7 @@ public class CartItemController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('USER')")
+    @Operation(summary = "Update cart item")
     public CartItemResponseDto update(@PathVariable Long id, @RequestBody UpdateCartItemDto dto) {
 
         CartItem cartItem = new CartItem();
@@ -73,7 +75,7 @@ public class CartItemController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('USER')")
+    @Operation(summary = "Delete cart item")
     public void delete(@PathVariable Long id) {
         cartItemService.delete(id);
     }

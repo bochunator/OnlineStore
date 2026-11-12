@@ -1,9 +1,11 @@
 package pl.bochnator.onlinestore.cart.model;
 
+import java.math.BigDecimal;
+
 public class UpdateCartItemDto {
 
     private Integer quantity;
-    private String price;
+    private BigDecimal price;
 
     public Integer getQuantity() {
         return quantity;
@@ -13,11 +15,11 @@ public class UpdateCartItemDto {
         this.quantity = quantity;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }
